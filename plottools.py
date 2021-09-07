@@ -1530,6 +1530,8 @@ def plotEIC1(df, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z',
                 label1 = 'Matching'
             elif affinity.startswith('unclassified'): 
                 label1 = 'Unclassified'
+            elif affinity.startswith('current'):
+                label1 = 'Current'
 
             #msg=r'${\rm %s~region~EIC~%s}$'%(label1,hadron)
             msg=r'${\rm %s~region~EIC}$'%(label1)
