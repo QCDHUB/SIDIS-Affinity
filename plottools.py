@@ -1358,7 +1358,7 @@ def plotEIC(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z
     py.savefig('gallery/%s.pdf'%outname)    
 
 
-def plotEIC1(df, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
+def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
 
     data=df
     data['Q']=data['Q2']**0.5
@@ -1367,8 +1367,12 @@ def plotEIC1(df, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z',
     
     if 'qT' not in data.keys():
         data['qT'] = data['pT']/data['z']
-        
-        
+    
+    # set affinity < 0 to 0 and affinity > 1 to 1
+    predictions[predictions<0] = 0
+    predictions[predictions>1] = 1
+    data[affinity] = predictions  
+    
     Q2b=data.Q2.unique()    
     xb=data.x.unique()
     zbins=data.z.unique()    
@@ -1448,9 +1452,6 @@ def plotEIC1(df, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z',
             msg='z > '+str(zbins[i]-zbins[i]/100)+' and z < '+ str(zbins[i]+zbins[i]/100)
             dd=d.query(msg)
             if dd.index.size==0: continue
-            #plot = ax.scatter(dd[plotx],dd[ploty], s=500*dd[affinity], c=dd[affinity], 
-            #                      cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
-            #ax.plot(dd[plotx],dd[ploty],'k-', alpha=0.25,label='') 
             plot = ax.scatter(dd[ploty],dd[plotx], s=500*dd[affinity]**0.2+20, c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             ax.plot(dd[ploty],dd[plotx],'k-', alpha=0.25,label='')
