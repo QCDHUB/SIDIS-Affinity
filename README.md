@@ -2,8 +2,8 @@
 
 ### To access the Colab notebook please click on the Open in Colab badge below
 
-[![Interactive Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Juniper82/SIDIS-Affinity/blob/main/interactive_plot.ipynb)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Juniper82/SIDIS-Affinity/blob/main/Finalrun_test_all_autothreshold.ipynb)
+[![Interactive Affinity Tool](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Juniper82/SIDIS-Affinity/blob/main/interactive_plot.ipynb)
+[![Model Evaluation](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/Juniper82/SIDIS-Affinity/blob/main/Finalrun_test_all_autothreshold.ipynb)
 
 ### Running the notebook:
 #### 1. Select "Run all" from the the Runtime drop down menu located in the upper left of notebook 
