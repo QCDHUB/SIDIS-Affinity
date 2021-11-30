@@ -10,13 +10,15 @@ import matplotlib.gridspec as gridspec
 
 def custom_label(label):
     if label == "Q2":
-        label = r'$Q^2\; (GeV^2)$'
+        label = r'\boldmath{$Q^2\; \rm(GeV^2)$}'
     if label == "qT":
         label = r'$q_T\; (GeV)$'
     if label == "W2":
         label = r'$W^2\; (GeV^2)$'
     if label == "qToverQ":
-        label = r'$q_T/Q$'
+        label = r'\boldmath{$q_T/Q$}'
+    if label == "qT":
+        label = r'$q_T\; \rm(GeV)$'
     if label == "qToverQ2":
         label = r'$q_T^2/Q^2$'
     if label == "dy":
@@ -28,7 +30,7 @@ def custom_label(label):
     if label == "yf":
         label = r'$y_f$'
     if label == "yh":
-        label = r'$y_h$'
+        label = r'\boldmath{$y_h$}'
     if label == "yp":
         label = r'$y_p$'
     if label == "yi_minus_yp":
@@ -58,10 +60,23 @@ def custom_label(label):
     if label == "R0":
         label = r'$R_0$'    
     if label == "x":
-        label = r'$x_{\rm Bj}$'    
+        label = r'\boldmath{$x_{\rm Bj}$}'    
 
 
     return label
+
+
+def custom_label1(label):
+    
+    if label == "qT":
+        label = 'q_T\; (GeV)'   
+    if label == "pT":
+        label = 'P_{hT}\; (GeV)'   
+
+
+    return label
+
+
 
 def color_plot(data, vert_lab, hor_lab, cmap="plasma", alpha=1.0, cbarshow = False):
     vert = data[vert_lab].values
@@ -71,7 +86,7 @@ def color_plot(data, vert_lab, hor_lab, cmap="plasma", alpha=1.0, cbarshow = Fal
 
     
     fig, ax = plt.subplots()
-    ax.tick_params(axis='both', which='major', labelsize=20, direction='in')
+    ax.tick_params(axis='both', which='minor', labelsize=20, direction='in')
 
 
     ax.set_ylabel(custom_label(vert_lab),
@@ -103,7 +118,7 @@ def color_plot_hull(data, vert_lab, hor_lab, cmap="plasma", alpha=1.0, color='b'
 
     
     fig, ax = plt.subplots()
-    ax.tick_params(axis='both', which='major', labelsize=20, direction='in')
+    ax.tick_params(axis='both', which='minor', labelsize=20, direction='in')
 
 
     ax.set_ylabel(custom_label(vert_lab),
@@ -151,13 +166,12 @@ def left(dict,i,k):
 def right(dict,i,k):
       return (i,k+1) in dict.keys()
 
-def plotJLab12(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
+def plotJLab12(data, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
 
-    data=pd.read_excel(fname)
-    data['Q']=data['Q2']**0.5
+    if 'Q' not in data.keys():
+        data['Q']=data['Q2']**0.5
     if 'had' not in data.keys() and 'hadron' in data.keys(): 
-        data['had'] = data['hadron']
-    
+        data['had'] = data['hadron']    
     if 'qT' not in data.keys():
         data['qT'] = data['pT']/data['z']
         
@@ -184,7 +198,7 @@ def plotJLab12(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty =
     AX={}
     cmap = plt.get_cmap(cmap_name) # choose cmap
  
-    # add a maller subplot to explain axes
+    # add a smaller subplot to explain axes
     leftb, bottomb, widthb, heightb = [0.2, 0.6, 0.25, 0.2]
     ax2 = fig.add_axes([leftb, bottomb, widthb, heightb])
     
@@ -202,7 +216,7 @@ def plotJLab12(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty =
         if plotx == 'pT': 
             ax.set_ylim(0,3) # pT is in [0,2]
             ax2.set_ylim(0,3)
-            ax2.set_ylabel(r'$P_T\;\rm (GeV)$', fontsize=70) 
+            ax2.set_ylabel(r'\boldmath{$P_{hT}\;\rm (GeV)$}', fontsize=70) 
         if plotx == 'qT': 
             ax.set_ylim(0,15) #(0,data.qT.max())
             ax2.set_ylim(0,15)
@@ -257,13 +271,13 @@ def plotJLab12(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty =
                   
                 
                 
-        ax.tick_params(axis='both', which='major', labelsize=20, direction='in')
+        ax.tick_params(axis='both', which='major', labelsize=30, direction='in')
         
         
         # Add embelishment here:
         if  below(bins,ir,ic)==False and left(bins,ir,ic)==False:    
 
-            ax.annotate('', xy=(-0.35, 9.2), 
+            ax.annotate('', xy=(-0.35, 8.2), 
                         xycoords='axes fraction', 
                         xytext=(-0.35, -0.1),
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
@@ -275,16 +289,16 @@ def plotJLab12(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty =
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))        
 
-            ax.annotate(r'$Q^2~({\rm GeV}^2)$', 
-                        xy=(-1.5,5),
+            ax.annotate(r'\boldmath{$Q^2~({\rm GeV}^2)$}', 
+                        xy=(-1.5,4),
                         xycoords='axes fraction',
                         size=80,
                         rotation=90)
 
-            ax.annotate(r'$x_{\rm Bj}$', 
+            ax.annotate(r'\boldmath{$x_{\rm Bj}$}', 
                         xy=(2.3,-1.2),
                         xycoords='axes fraction',
-                        size=90)
+                        size=80)
                     
             for i in range(len(data.x.unique())):
                 if xb[i]<2e-3: msg=r'$%0.5f$'%xb[i]
@@ -323,10 +337,10 @@ def plotJLab12(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty =
 
 
             #msg=r'${\rm %s~region~EIC~%s}$'%(label1,hadron)
-            msg=r'${\rm %s~region~JLab~12}$'%(label1)
-            ax.text(0,9.2,msg,transform=ax.transAxes,size=80)
-            msg =r'${\sqrt{s}=4.6 \; \; \rm GeV}$'
+            msg=r'\boldmath{${\rm %s~region~JLab}$}'%(label1)
             ax.text(0,8.2,msg,transform=ax.transAxes,size=80)
+            #msg =r'\boldmath{${\sqrt{s}=4.6 \; \; \rm GeV}$}'
+            #ax.text(0,8.2,msg,transform=ax.transAxes,size=80)
             #msg =r'${\rm %s~vs.~%s}$'%(ploty,plotx)
             #ax.text(0,5.2,msg,transform=ax.transAxes,size=80)
             
@@ -340,17 +354,22 @@ def plotJLab12(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty =
     cbar = fig.colorbar(plot,cax=cbar_ax)
     cbar.ax.tick_params(labelsize=40)
     outname = 'JLab12_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
-    py.savefig('./Figs/%s.pdf'%outname)      
+    #py.savefig('Figs/%s.pdf'%outname)
+    py.savefig('./Figs/%s.pdf'%outname,
+            bbox_inches ="tight")
+    #py.savefig('./Figs/%s.pdf'%outname,
+    #        bbox_inches ="tight",
+    #        pad_inches = 1)      
 
 
 
-def plotHermes(fname, hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_r', yscale = 'log', plotx = 'qT', ploty = 'value', plotdata = False, predictions = False):
+def plotHermes(data , hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_r', yscale = 'log', plotx = 'qT', ploty = 'value', plotdata = False, predictions = False):
 
-    data=pd.read_excel(fname)
-    data['Q']=data['Q2']**0.5
-    if 'had' not in data.keys() and 'hadron' in data.keys(): 
-        data['had'] = data['hadron']
     
+    if 'Q' not in data.keys():
+        data['Q']=data['Q2']**0.5
+    if 'had' not in data.keys() and 'hadron' in data.keys(): 
+        data['had'] = data['hadron']    
     if 'qT' not in data.keys():
         data['qT'] = data['pT']/data['z']
     
@@ -419,11 +438,17 @@ def plotHermes(fname, hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_
         if ploty == 'value': ax.set_ylim(1e-4,100)
         if ploty == 'z': ax.set_ylim(0,1)
             
+        if plotx == 'qT': 
+            ticksx = [0,2,4,6]
+        elif plotx == 'pT': 
+            ticksx = [0,0.2,0.4,0.6,0.8]
+            ax.set_xlim(0,1)
+            
         ax.set_yscale(yscale) # log or lin
         if all(k!=_ for _ in [(1,0),(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8)]): 
             ax.set_xticks([]) 
         else:
-            ax.set_xticks([0,2,4,6])
+            ax.set_xticks(ticksx)
             
         if all(k!=_ for _ in [(1,0)]): 
             ax.set_yticklabels([])
@@ -437,18 +462,21 @@ def plotHermes(fname, hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_
             msg='%f<z and z<%f'%(zbins[i][0],zbins[i][1])
             dd=d.query(msg)
             if dd.index.size==0: continue
-            plot = ax.scatter(dd[plotx],dd[ploty], s=200*dd[affinity], c=dd[affinity], 
+            plot = ax.scatter(dd[plotx],dd[ploty], s=500*dd[affinity]**0.2+20, c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             ax.plot(dd[plotx],dd[ploty],'k-', alpha=0.25,label='') 
             
             if ploty == 'value' and plotdata:
-                e=ax.errorbar(dd.qT,dd.value,np.sqrt(dd.stat_u**2 + dd.systabs_u**2),fmt='.',label=r'$%0.2f<z<%0.2f$'%(zbins[i][0],zbins[i][1])) 
+                #e=ax.errorbar(dd.qT,dd.value,np.sqrt(dd.stat_u**2 + dd.systabs_u**2),fmt='.',label=r'$%0.2f<z_h<%0.2f$'%(zbins[i][0],zbins[i][1])) 
+                e=ax.errorbar(dd[plotx],dd.value,np.sqrt(dd.stat_u**2 + dd.systabs_u**2),fmt='.',color='k',label=r'$%0.2f<z_h<%0.2f$'%(zbins[i][0],zbins[i][1])) 
                 c=e[0].get_color() # Plot the data is value is plotted TODO, what is alpha?
 
-            if predictions and ploty == 'value' and 'Prediction' in dd.keys():
+            if predictions and ploty == 'value' and 'thy' in dd.keys():
                 # Plot TMD prediction for those bins
-                ax.fill_between(dd[plotx],(dd['Prediction']+dd['Prediction_err']),(dd['Prediction']-dd['Prediction_err']),alpha=0.25) 
-                ax.plot(dd[plotx],dd['Prediction'],'b-', alpha=0.5,label='')  # Plot TMD JAM20 SIDIS 
+                #ax.fill_between(dd[plotx],(dd['Prediction']+dd['Prediction_err']),(dd['Prediction']-dd['Prediction_err']),alpha=0.25) 
+                #ax.plot(dd[plotx],dd['Prediction'],'b-', alpha=0.5,label='')  # Plot TMD JAM20 SIDIS 
+                ax.plot(dd[plotx],dd['thy'],'g-', alpha=0.5,label='')  # Plot TMD JAM20 SIDIS 
+
                 
             if predictions and ploty == 'value' and 'LO' in dd.keys():
                 tot=dd.DDSLO+dd.DDSNLOdelta+dd.DDSNLOplus+dd.DDSNLOrest # DDS NLO from Wang, Rogers, Sato, Gonzalez
@@ -466,19 +494,19 @@ def plotHermes(fname, hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))
 
-            ax.annotate('', xy=(8.2,-0.3), 
+            ax.annotate('', xy=(6.2,-0.3), 
                         xycoords='axes fraction', 
                         xytext=(-0.1, -0.3),
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))        
 
-            ax.annotate(r'$Q^2~({\rm GeV}^2)$', 
-                        xy=(-1,1),
+            ax.annotate(r'\boldmath{$Q^2~({\rm GeV}^2)$}', 
+                        xy=(-1,0.5),
                         xycoords='axes fraction',
                         size=40,
                         rotation=90)
 
-            ax.annotate(r'$x_{\rm Bj}$', 
+            ax.annotate(r'\boldmath{$x_{\rm Bj}$}', 
                         xy=(2.9,-0.8),
                         xycoords='axes fraction',
                         size=40)
@@ -486,7 +514,7 @@ def plotHermes(fname, hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_
             for i in range(6):
                 if xb[i]<2e-2: msg=r'$%0.3f$'%xb[i]
                 else:msg=r'$%0.2f$'%xb[i]
-                ax.text(0.5+i,-0.5,msg,transform=ax.transAxes,size=30,ha="center")
+                ax.text(0.5+i,-0.6,msg,transform=ax.transAxes,size=30,ha="center")
                 ax.annotate('',xy=(i,-0.35),xycoords='axes fraction',xytext=(i+1, -0.35), 
                             arrowprops=dict(arrowstyle="<->", color='k'))
     
@@ -496,7 +524,7 @@ def plotHermes(fname, hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_
                 ax.annotate('',xy=(-0.4,i),xycoords='axes fraction',xytext=(-0.4,i+1), 
                             arrowprops=dict(arrowstyle="<->", color='k'))
                 
-        if ploty == 'value': ax.plot([d.Q.values[0],8],[2e-4,2e-4],c='y',lw=10,alpha=0.5) # plot qt>Q region
+        if ploty == 'value' and plotx=='qT': ax.plot([d.Q.values[0],8],[2e-4,2e-4],c='y',lw=10,alpha=0.5) # plot qt>Q region
         
         if k==(1,0): 
             if predictions: # if we plot predictions, explain what those are
@@ -506,9 +534,9 @@ def plotHermes(fname, hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_
                 ax.legend([(TMD),NLO,qTrange],[r'$\rm TMD$',r'$\rm NLO$',r'$q_{\rm T}>Q$']\
                     ,bbox_to_anchor=[4.8, 1.5]\
                     ,loc='center',fontsize=40,frameon=0) # legend for the lines in the plot
-            else: # otherwise just plot qt>Q
+            elif plotx == 'qT': # otherwise just plot qt>Q
                 qTrange = mpatches.Rectangle((0,0), 0, 0, ec="none",color='y',alpha=0.5)
-                ax.legend([qTrange],[r'$q_{\rm T}>Q$']\
+                ax.legend([qTrange],[r'$q_{T}>Q$']\
                     ,bbox_to_anchor=[4.8, 1.5]\
                     ,loc='center',fontsize=40,frameon=0) # legend for the lines in the plot  
                 
@@ -527,20 +555,24 @@ def plotHermes(fname, hadron = 'pi+', affinity = 'tmdaff', cmap_name = 'seismic_
             elif affinity.startswith('soft'): 
                 label1 = 'Soft'
             #msg=r'${\rm %s~region~EIC~%s}$'%(label1,hadron)
-            msg=r'${\rm %s~region~HERMES}$'%(label1)
+            msg=r'\boldmath{${\rm %s~region~HERMES}$}'%(label1)
             ax.text(0.1,1.8,msg,transform=ax.transAxes,size=40)
-            msg =r'${\rm %s~vs.~%s}$'%(ploty,plotx)
+            if ploty=='value':
+                msg =r'\boldmath{${\rm M^h_n~vs.~%s}$}'%(custom_label1(plotx))
+            else:    
+                msg =r'${\rm %s~vs.~%s}$'%(ploty,custom_label1(plotx))
+
             ax.text(0.1,1.2,msg,transform=ax.transAxes,size=40)
 
 
             
             
         if k==(1,4): # plot the legend of z binning
-            ax.legend(bbox_to_anchor=[2.8, 0.78], loc='center',fontsize=30,frameon=0\
+            ax.legend(bbox_to_anchor=[2.8, 0.78], loc='center',fontsize=25,frameon=0\
                    ,markerscale=2,handletextpad=0.1)
         
     
-    cbar_ax = fig.add_axes([0.92, 0.2, 0.01, 0.5])
+    cbar_ax = fig.add_axes([0.86, 0.2, 0.01, 0.5])
     cbar = fig.colorbar(plot,cax=cbar_ax)
     cbar.ax.tick_params(labelsize=20)
     outname = 'HERMES_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
@@ -564,13 +596,13 @@ def smooth(X,Y):
         if rel_err>0.05: Y[i]=f(X[i])
     return Y
 
-def plotCompass(fname, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_r', yscale = 'log', plotx = 'qT', ploty = 'value', plotdata = False, predictions = False):
+def plotCompass(data, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_r', yscale = 'log', plotx = 'qT', ploty = 'value', plotdata = False, predictions = False):
 
-    data=pd.read_excel(fname)
-    data['Q']=data['Q2']**0.5
-    if 'had' not in data.keys() and 'hadron' in data.keys(): 
-        data['had'] = data['hadron']
     
+    if 'Q' not in data.keys():
+        data['Q']=data['Q2']**0.5
+    if 'had' not in data.keys() and 'hadron' in data.keys(): 
+        data['had'] = data['hadron']   
     if 'qT' not in data.keys():
         data['qT'] = data['pT']/data['z']
     
@@ -665,12 +697,14 @@ def plotCompass(fname, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_
             msg='%f<z and z<%f'%(zbins[i][0],zbins[i][1])
             dd=d.query(msg)
             if dd.index.size==0: continue
-            plot = ax.scatter(dd[plotx],dd[ploty], s=200*dd[affinity], c=dd[affinity], 
+            plot = ax.scatter(dd[plotx],dd[ploty], s=500*dd[affinity]**0.2+20, c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             ax.plot(dd[plotx],dd[ploty],'k-', alpha=0.25,label='') 
             
             if ploty == 'value' and plotdata:
-                e=ax.errorbar(dd.qT,dd.value,dd.alpha,fmt='.',label=r'$%0.2f<z<%0.2f$'%(zbins[i][0],zbins[i][1]))
+                #e=ax.errorbar(dd.qT,dd.value,dd.alpha,fmt='.',label=r'$%0.2f<z<%0.2f$'%(zbins[i][0],zbins[i][1]))
+                #e=ax.errorbar(dd.qT,dd.value,np.sqrt(dd.stat_u**2+dd.syst_u**2),fmt='.',label=r'$%0.2f<z_h<%0.2f$'%(zbins[i][0],zbins[i][1]))
+                e=ax.errorbar(dd.qT,dd.value,np.sqrt(dd.stat_u**2+dd.syst_u**2),fmt='.',color='k',label=r'$%0.2f<z_h<%0.2f$'%(zbins[i][0],zbins[i][1]))
                 c=e[0].get_color() # Plot the data is value is plotted TODO, what is alpha?
 
             if predictions and ploty == 'value' and 'Prediction' in dd.keys():
@@ -684,7 +718,7 @@ def plotCompass(fname, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_
                 tot=smooth(dd.qT.values,tot)
                 ax.plot(dd.qT,tot/dd.idisNLO,color='r',ls='--',label='',alpha=0.5) # Plot NLO SIDIS
     
-        ax.tick_params(axis='both', which='major', labelsize=20, direction='in')
+        ax.tick_params(axis='both', which='major', labelsize=30, direction='in')
         
         
         if k==(4,0):
@@ -701,13 +735,13 @@ def plotCompass(fname, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))        
 
-            ax.annotate(r'$Q^2~({\rm GeV}^2)$', 
-                        xy=(-1,3),
+            ax.annotate(r'\boldmath{$Q^2~({\rm GeV}^2)$}', 
+                        xy=(-1,2),
                         xycoords='axes fraction',
                         size=50,
                         rotation=90)
 
-            ax.annotate(r'$x_{\rm Bj}$', 
+            ax.annotate(r'\boldmath{$x_{\rm Bj}$}', 
                         xy=(3.9,-0.7),
                         xycoords='axes fraction',
                         size=50)
@@ -736,7 +770,7 @@ def plotCompass(fname, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_
                     ,loc='center',fontsize=40,frameon=0) # legend for the lines in the plot
             else: # otherwise just plot qt>Q
                 qTrange = mpatches.Rectangle((0,0), 0, 0, ec="none",color='y',alpha=0.5)
-                ax.legend([qTrange],[r'$q_{\rm T}>Q$']\
+                ax.legend([qTrange],[r'\boldmath{$q_{\rm T}>Q$}']\
                     ,bbox_to_anchor=[-1.2, 1.]\
                     ,loc='center',fontsize=40,frameon=0) # legend for the lines in the plot  
 
@@ -758,9 +792,12 @@ def plotCompass(fname, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_
                 
                 
                 
-            msg=r'${\rm %s~region~COMPASS}$'%(label1)
+            msg=r'\boldmath{${\rm %s~region~COMPASS}$}'%(label1)
             ax.text(-2,2.8,msg,transform=ax.transAxes,size=50)
-            msg =r'${\rm %s~vs.~%s}$'%(ploty,plotx)
+            if ploty=='value':
+                msg =r'\boldmath{${\rm M^h~vs.~%s}$}'%(custom_label1(plotx))
+            else:    
+                msg =r'${\rm %s~vs.~%s}$'%(ploty,custom_label1(plotx))
             ax.text(-2,2.2,msg,transform=ax.transAxes,size=50)
             
         if k==(1,4): # plot the legend of
@@ -971,7 +1008,10 @@ def plotCompass1(data, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_
                 
             msg=r'${\rm %s~region~COMPASS}$'%(label1)
             ax.text(-2,2.8,msg,transform=ax.transAxes,size=50)
-            msg =r'${\rm %s~vs.~%s}$'%(ploty,plotx)
+            if ploty=='value':
+                msg =r'${\rm M^h~vs.~%s}$'%(plotx)
+            else:    
+                msg =r'${\rm %s~vs.~%s}$'%(ploty,plotx)
             ax.text(-2,2.2,msg,transform=ax.transAxes,size=50)
             
         if k==(1,4): # plot the legend of
@@ -986,10 +1026,10 @@ def plotCompass1(data, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_
     py.savefig('Figs/%s.pdf'%outname)
 
 
-def plotpolarCompass(fname, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_r', yscale = 'linear', plotx = 'qT', ploty = 'value', plotdata = False, predictions = False):
+def plotpolarCompass(data, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'seismic_r', yscale = 'linear', plotx = 'qT', ploty = 'value', plotdata = False, predictions = False):
 
-    data=pd.read_excel(fname)
-    data['Q']=data['Q2']**0.5
+    if 'Q' not in data.keys():
+        data['Q']=data['Q2']**0.5
     if 'had' not in data.keys() and 'hadron' in data.keys(): 
         data['had'] = data['hadron']
     
@@ -1091,7 +1131,7 @@ def plotpolarCompass(fname, hadron = 'h+', affinity = 'tmdaff', cmap_name = 'sei
             msg='%f<z and z<%f'%(zbins[i][0],zbins[i][1])
             dd=d.query(msg)
             if dd.index.size==0: continue
-            plot = ax.scatter(dd[plotx],dd[ploty], s=200*dd[affinity], c=dd[affinity], 
+            plot = ax.scatter(dd[plotx],dd[ploty], s=500*dd[affinity], c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             ax.plot(dd[plotx],dd[ploty],'k-', alpha=0.25,label='') 
             
@@ -1291,13 +1331,13 @@ def plotEIC(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))        
 
-            ax.annotate(r'$Q^2~({\rm GeV}^2)$', 
+            ax.annotate(r'\boldmath{$Q^2~({\rm GeV}^2)$}', 
                         xy=(-1.5,5),
                         xycoords='axes fraction',
                         size=80,
                         rotation=90)
 
-            ax.annotate(r'$x_{\rm Bj}$', 
+            ax.annotate(r'\boldmath{$x_{\rm Bj}$}', 
                         xy=(7.9,-1.),
                         xycoords='axes fraction',
                         size=90)
@@ -1341,9 +1381,9 @@ def plotEIC(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z
                 label1 = 'Unclassified'
 
             #msg=r'${\rm %s~region~EIC~%s}$'%(label1,hadron)
-            msg=r'${\rm %s~region~EIC}$'%(label1)
+            msg=r'\boldmath{${\rm %s~region~EIC}$}'%(label1)
             ax.text(0,6.8,msg,transform=ax.transAxes,size=80)
-            msg =r'${\rm %s~vs.~%s}$'%(ploty,plotx)
+            msg =r'\boldmath{${\rm %s~vs.~%s}$}'%(ploty,plotx)
             ax.text(0,5.2,msg,transform=ax.transAxes,size=80)
             
             # plot the legend of axes
@@ -1358,21 +1398,17 @@ def plotEIC(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z
     py.savefig('gallery/%s.pdf'%outname)    
 
 
-def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
+def plotEIC1(data, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
 
-    data=df
+    
     data['Q']=data['Q2']**0.5
     if 'had' not in data.keys() and 'hadron' in data.keys(): 
         data['had'] = data['hadron']
     
     if 'qT' not in data.keys():
         data['qT'] = data['pT']/data['z']
-    
-    # set affinity < 0 to 0 and affinity > 1 to 1
-    predictions[predictions<0] = 0
-    predictions[predictions>1] = 1
-    data[affinity] = predictions  
-    
+        
+        
     Q2b=data.Q2.unique()    
     xb=data.x.unique()
     zbins=data.z.unique()    
@@ -1389,7 +1425,7 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
     
     
     nrows,ncols=len(Q2b),len(xb)
-    fig = plt.figure(figsize=(ncols*3.2,nrows*3.2))
+    fig = py.figure(figsize=(ncols*3.2,nrows*3.2))
     gs = gridspec.GridSpec(nrows,ncols)
     gs.update(wspace=0.,hspace=0,left=0.12, right=0.86,bottom=0.13,top=0.86)
     AX={}
@@ -1402,24 +1438,35 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
     for k in sorted(bins):
         ir,ic=k
         #print k
-        ax = plt.subplot(gs[ir,ic])
+        ax = py.subplot(gs[ir,ic])
         ax.set_xlim(0,8)
         ax.set_ylim(0,1)
         #ax.set_xlim(0,data.qT.max())
         if ploty == 'z': 
             ax.set_xlim(0,1) # z is in [0,1]
             ax2.set_xlim(0,1)
-            ax2.set_xlabel(r'$z_h$', fontsize=70) 
+            ax2.set_xlabel(r'\boldmath{$z_h$}', fontsize=70) 
         if plotx == 'pT': 
-            ax.set_ylim(0,8) # pT is in [0,2]
-            ax2.set_ylim(0,8)
-            ax2.set_ylabel(r'$P_T \; \rm (GeV)$', fontsize=70) 
+            if affinity.startswith('col'):
+                max = 40
+            elif affinity.startswith('tmd'):
+                max = 10
+            elif affinity.startswith('soft'):
+                max = 10
+            elif affinity.startswith('target'):
+                max = 10
+            else:
+                max = 20
+            ax.set_ylim(0,max) # pT is in [0,2]
+            ax2.set_ylim(0,max)
+            ax2.set_ylabel(r'\boldmath{$P_{hT} \; \rm (GeV)$}', fontsize=70) 
         if plotx == 'qT': 
             ax.set_ylim(0,15) #(0,data.qT.max())
             ax2.set_ylim(0,15)
             ax2.set_ylabel(r'$q_T \; \rm (GeV)$', fontsize=70)
             
-                     
+ 
+                    
             
         ax.set_yscale(yscale) # log or linear
         ax2.set_yscale(yscale)
@@ -1430,14 +1477,14 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
         
         ax2.set_xticks(xticks)
         ax2.set_yticks(yticks)
-        ax2.set_xticklabels(xticks, fontsize=60)  
-        ax2.set_yticklabels(yticks, fontsize=60)
+        ax2.set_xticklabels(xticks, fontsize=55)  
+        ax2.set_yticklabels(yticks, fontsize=55)
         
         ax.set_xticks(xticks)
         ax.set_yticks(yticks)
-        ax.set_xticklabels([],fontsize=25)
-        ax.set_yticklabels([],fontsize=25)
-
+        ax.set_xticklabels([])
+        ax.set_yticklabels([])
+        
         if  below(bins,ir,ic)==False : # no bins below
             ax.set_xticklabels(xticks)
         if  left(bins,ir,ic)==False : # no bins to the left
@@ -1452,12 +1499,15 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
             msg='z > '+str(zbins[i]-zbins[i]/100)+' and z < '+ str(zbins[i]+zbins[i]/100)
             dd=d.query(msg)
             if dd.index.size==0: continue
-            plot = ax.scatter(dd[ploty],dd[plotx], s=500*dd[affinity]**0.2+20, c=dd[affinity], 
+            #plot = ax.scatter(dd[plotx],dd[ploty], s=500*dd[affinity], c=dd[affinity], 
+            #                      cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
+            #ax.plot(dd[plotx],dd[ploty],'k-', alpha=0.25,label='') 
+            plot = ax.scatter(dd[ploty],dd[plotx], s=500*dd[affinity]**0.2+10, c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             ax.plot(dd[ploty],dd[plotx],'k-', alpha=0.25,label='')
             #ax.text(0, 2, k, fontsize=18) # show what bin is shown
             if k == (3,9):
-                ax2.scatter(dd[ploty],dd[plotx], s=1500*dd[affinity]**0.2+20, c=dd[affinity], 
+                ax2.scatter(dd[ploty],dd[plotx], s=2500*dd[affinity]**0.2+20, c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
                 ax2.plot(dd[ploty],dd[plotx],'k-', alpha=0.25,label='')
                 ax.annotate('',xy=(0.,1),xycoords='axes fraction',xytext=(-1.8,2), 
@@ -1465,7 +1515,7 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
                   
                 
                 
-        ax.tick_params(axis='both', which='major', labelsize=30, direction='in')
+        ax.tick_params(axis='both', which='major', labelsize=32, direction='in')
         
         
         # Add embelishment here:
@@ -1477,19 +1527,19 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))
 
-            ax.annotate('', xy=(17.2,-0.3), 
+            ax.annotate('', xy=(16.2,-0.3), 
                         xycoords='axes fraction', 
                         xytext=(-0.1, -0.3),
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))        
 
-            ax.annotate(r'$Q^2~({\rm GeV}^2)$', 
-                        xy=(-1.5,5),
+            ax.annotate(r'\boldmath{$Q^2~({\rm GeV}^2)$}', 
+                        xy=(-1.5,3.5),
                         xycoords='axes fraction',
                         size=80,
                         rotation=90)
 
-            ax.annotate(r'$x_{\rm Bj}$', 
+            ax.annotate(r'\boldmath{$x_{\rm Bj}$}', 
                         xy=(7.9,-1.2),
                         xycoords='axes fraction',
                         size=90)
@@ -1498,13 +1548,13 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
                 if xb[i]<2e-3: msg=r'$%0.5f$'%xb[i]
                 elif xb[i]<2e-2: msg=r'$%0.3f$'%xb[i]  
                 else:msg=r'$%0.2f$'%xb[i]
-                ax.text(0.5+i,-0.65,msg,transform=ax.transAxes,size=35,ha="center") # size sets outter axis label size
+                ax.text(0.5+i,-0.65,msg,transform=ax.transAxes,size=55,ha="center")
                 ax.annotate('',xy=(i,-0.35),xycoords='axes fraction',xytext=(i+1, -0.35), 
                             arrowprops=dict(arrowstyle="<->", color='k'))
     
             for i in range(len(data.Q2.unique())):
                 ax.text(-0.65,0.5+i,r'$%0.1f$'%Q2b[i],
-                      transform=ax.transAxes,size=35,rotation=90,va="center") # size sets outter axis label size
+                      transform=ax.transAxes,size=55,rotation=90,va="center")
                 ax.annotate('',xy=(-0.4,i),xycoords='axes fraction',xytext=(-0.4,i+1), 
                             arrowprops=dict(arrowstyle="<->", color='k'))
                 
@@ -1524,21 +1574,19 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
             elif affinity.startswith('target'): 
                 label1 = 'Target' 
             elif affinity.startswith('soft'): 
-                label1 = 'Central'
+                label1 = 'Soft'
             elif affinity.startswith('highorder'): 
                 label1 = 'High order'
             elif affinity.startswith('match'): 
                 label1 = 'Matching'
             elif affinity.startswith('unclassified'): 
                 label1 = 'Unclassified'
-            elif affinity.startswith('current'):
-                label1 = 'Current'
 
             #msg=r'${\rm %s~region~EIC~%s}$'%(label1,hadron)
-            msg=r'${\rm %s~region~EIC}$'%(label1)
-            ax.text(0,9.2,msg,transform=ax.transAxes,size=80)
-            msg =r'${\sqrt{s}=140 \; \; \rm GeV}$'
-            ax.text(0,8.2,msg,transform=ax.transAxes,size=80)
+            msg=r'\boldmath{${\rm %s~region~EIC}$}'%(label1)
+            ax.text(0,8.8,msg,transform=ax.transAxes,size=80)
+            #msg =r'${\sqrt{s}=140 \; \; \rm GeV}$'
+            #ax.text(0,8.2,msg,transform=ax.transAxes,size=80)
             #msg =r'${\rm %s~vs.~%s}$'%(ploty,plotx)
             #ax.text(0,5.2,msg,transform=ax.transAxes,size=80)
             
@@ -1548,9 +1596,8 @@ def plotEIC1(df, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT',
     
 
     
-    cbar_ax = fig.add_axes([0.92, 0.2, 0.01, 0.5])
+    cbar_ax = fig.add_axes([0.87, 0.2, 0.01, 0.5])
     cbar = fig.colorbar(plot,cax=cbar_ax)
     cbar.ax.tick_params(labelsize=40)
-    plt.show()
-    #outname = 'EIC_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
-    #py.savefig('Figs/%s.pdf'%outname)    
+    outname = 'EIC_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
+    py.savefig('Figs/%s.pdf'%outname)    
