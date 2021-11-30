@@ -6,7 +6,7 @@
 
 [![Interactive Affinity Tool](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Juniper82/SIDIS-Affinity/blob/main/interactive_plot.ipynb)  
 
-> Model Evaluation  (not currently workking on colab)  
+> Model Evaluation   
 
 [![Model Evaluation](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Juniper82/SIDIS-Affinity/blob/main/Finalrun_test_all_autothreshold.ipynb)
 
