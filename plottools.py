@@ -1398,7 +1398,7 @@ def plotEIC(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z
     py.savefig('gallery/%s.pdf'%outname)    
 
 
-def plotEIC1(data, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
+def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
 
     
     data['Q']=data['Q2']**0.5
@@ -1408,6 +1408,12 @@ def plotEIC1(data, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z
     if 'qT' not in data.keys():
         data['qT'] = data['pT']/data['z']
         
+    # set affinity < 0 to 0 and affinity > 1 to 1
+    predictions[predictions<0] = 0
+    predictions[predictions>1] = 1
+    data[affinity] = predictions  
+
+
         
     Q2b=data.Q2.unique()    
     xb=data.x.unique()
