@@ -1589,7 +1589,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
                 label1 = 'Unclassified'
 
             #msg=r'${\rm %s~region~EIC~%s}$'%(label1,hadron)
-            msg=r'\boldmath{${\rm %s~region~EIC}$}'%(label1)
+            msg=r'${\rm %s~region~EIC}$'%(label1)
             ax.text(0,8.8,msg,transform=ax.transAxes,size=80)
             #msg =r'${\sqrt{s}=140 \; \; \rm GeV}$'
             #ax.text(0,8.2,msg,transform=ax.transAxes,size=80)
