@@ -1605,5 +1605,5 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
     cbar_ax = fig.add_axes([0.87, 0.2, 0.01, 0.5])
     cbar = fig.colorbar(plot,cax=cbar_ax)
     cbar.ax.tick_params(labelsize=40)
-    outname = 'EIC_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
-    py.savefig('Figs/%s.pdf'%outname)    
+#     outname = 'EIC_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
+#     py.savefig('Figs/%s.pdf'%outname)    
