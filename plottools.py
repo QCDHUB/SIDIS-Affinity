@@ -1483,8 +1483,8 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
         
         ax2.set_xticks(xticks)
         ax2.set_yticks(yticks)
-        ax2.set_xticklabels(xticks, fontsize=55)  
-        ax2.set_yticklabels(yticks, fontsize=55)
+        ax2.set_xticklabels(xticks, fontsize=25)  
+        ax2.set_yticklabels(yticks, fontsize=25)
         
         ax.set_xticks(xticks)
         ax.set_yticks(yticks)
