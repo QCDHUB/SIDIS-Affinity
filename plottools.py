@@ -1451,7 +1451,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
         if ploty == 'z': 
             ax.set_xlim(0,1) # z is in [0,1]
             ax2.set_xlim(0,1)
-            ax2.set_xlabel(r'$\mathbf{$z_h$}$', fontsize=70) 
+            ax2.set_xlabel(r'$\mathbf{z_h}$', fontsize=70) 
         if plotx == 'pT': 
             if affinity.startswith('col'):
                 max = 40
@@ -1465,7 +1465,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
                 max = 20
             ax.set_ylim(0,max) # pT is in [0,2]
             ax2.set_ylim(0,max)
-            ax2.set_ylabel(r'$\mathbf{$P_{hT} \; \rm (GeV)$}$', fontsize=70) 
+            ax2.set_ylabel(r'$\mathbf{P_{hT} \; \rm (GeV)}$', fontsize=70) 
         if plotx == 'qT': 
             ax.set_ylim(0,15) #(0,data.qT.max())
             ax2.set_ylim(0,15)
@@ -1539,13 +1539,13 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))        
 
-            ax.annotate(r'$\mathbf{$Q^2~({\rm GeV}^2)$}$', 
+            ax.annotate(r'$\mathbf{Q^2~({\rm GeV}^2)}$', 
                         xy=(-1.5,3.5),
                         xycoords='axes fraction',
                         size=80,
                         rotation=90)
 
-            ax.annotate(r'$\mathbf{$x_{\rm Bj}$}$', 
+            ax.annotate(r'$\mathbf{x_{\rm Bj}}$', 
                         xy=(7.9,-1.2),
                         xycoords='axes fraction',
                         size=90)
@@ -1589,7 +1589,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
                 label1 = 'Unclassified'
 
             #msg=r'${\rm %s~region~EIC~%s}$'%(label1,hadron)
-            msg=r'$\mathbf{${\rm %s~region~EIC}$}$'%(label1)
+            msg=r'$\mathbf{\rm %s~region~EIC}$'%(label1)
             ax.text(0,8.8,msg,transform=ax.transAxes,size=80)
             #msg =r'${\sqrt{s}=140 \; \; \rm GeV}$'
             #ax.text(0,8.2,msg,transform=ax.transAxes,size=80)
