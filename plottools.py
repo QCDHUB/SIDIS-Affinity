@@ -1554,13 +1554,13 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
                 if xb[i]<2e-3: msg=r'$%0.5f$'%xb[i]
                 elif xb[i]<2e-2: msg=r'$%0.3f$'%xb[i]  
                 else:msg=r'$%0.2f$'%xb[i]
-                ax.text(0.5+i,-0.65,msg,transform=ax.transAxes,size=55,ha="center")
+                ax.text(0.5+i,-0.65,msg,transform=ax.transAxes,size=35,ha="center")
                 ax.annotate('',xy=(i,-0.35),xycoords='axes fraction',xytext=(i+1, -0.35), 
                             arrowprops=dict(arrowstyle="<->", color='k'))
     
             for i in range(len(data.Q2.unique())):
                 ax.text(-0.65,0.5+i,r'$%0.1f$'%Q2b[i],
-                      transform=ax.transAxes,size=55,rotation=90,va="center")
+                      transform=ax.transAxes,size=35,rotation=90,va="center")
                 ax.annotate('',xy=(-0.4,i),xycoords='axes fraction',xytext=(-0.4,i+1), 
                             arrowprops=dict(arrowstyle="<->", color='k'))
                 
