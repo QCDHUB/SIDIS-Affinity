@@ -1403,7 +1403,7 @@ def plotEIC(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z
 
 def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
     plt.rc('font',**{'family':'serif','serif':['Times New Roman']})
-    plt.rc('text', usetex=True)
+    #plt.rc('text', usetex=True)
    # plt.rc('font', family='serif')
     
     data['Q']=data['Q2']**0.5
