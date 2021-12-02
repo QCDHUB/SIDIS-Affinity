@@ -6,8 +6,6 @@
 
 [![Interactive Affinity Tool](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Juniper82/SIDIS-Affinity/blob/main/interactive_plot.ipynb)  
 
-[![Interactive Affinity Tool](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1J8P8YF2uBUELVEDCNzW7oh8_l8EB0jhX?usp=sharing)
-
 > Model Evaluation   
 
 [![Model Evaluation](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Juniper82/SIDIS-Affinity/blob/main/Finalrun_test_all_autothreshold.ipynb)
