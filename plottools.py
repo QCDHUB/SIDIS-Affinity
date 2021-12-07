@@ -6,8 +6,8 @@ from scipy.spatial import ConvexHull, convex_hull_plot_2d
 import pylab as py
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-
-plt.rcParams['mathtext.bf'] = 'Times:bold' # use with built in mathtext
+import matplotlib as mpl
+mpl.rcParams.update({"mathtext.fontset" : "custom", "mathtext.bf" : "STIXGeneral:bold", "mathtext.rm" : "STIXGeneral"})
 
 # three lines below are for use with Latex not mathtext
 # plt.rcParams['text.usetex'] = True
