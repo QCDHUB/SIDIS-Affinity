@@ -6,9 +6,13 @@ from scipy.spatial import ConvexHull, convex_hull_plot_2d
 import pylab as py
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-plt.rcParams['text.usetex'] = True
-plt.rcParams['font.family'] = 'serif'
-plt.rcParams['font.serif'] = ['Times New Roman'] + plt.rcParams['font.serif']
+
+plt.rcParams['mathtext.bf'] = 'Times:bold' # use with built in mathtext
+
+# three lines below are for use with Latex not mathtext
+# plt.rcParams['text.usetex'] = True
+# plt.rcParams['font.family'] = 'serif'
+# plt.rcParams['font.serif'] = ['Times New Roman'] + plt.rcParams['font.serif']
 
 def custom_label(label):
     if label == "Q2":
@@ -1466,11 +1470,11 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
                 max = 20
             ax.set_ylim(0,max) # pT is in [0,2]
             ax2.set_ylim(0,max)
-            ax2.set_ylabel(r'$\bf{P_{hT} \; (GeV)}$', fontsize=70) 
+            ax2.set_ylabel(r'$\mathbf{P_{hT} \; (GeV)}$', fontsize=70) 
         if plotx == 'qT': 
             ax.set_ylim(0,15) #(0,data.qT.max())
             ax2.set_ylim(0,15)
-            ax2.set_ylabel(r'$\bf{q_T \; \rm (GeV)}$', fontsize=70)
+            ax2.set_ylabel(r'$\mathbf{q_T \; \rm (GeV)}$', fontsize=70)
             
  
                     
@@ -1540,13 +1544,13 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
                         arrowprops=dict(arrowstyle="-|>, head_width=1, head_length=2", 
                         color='k',lw=3))        
 
-            ax.annotate(r'$\bf{Q^2~({GeV}^2)}$', 
+            ax.annotate(r'$\mathbf{Q^2~({GeV}^2)}$', 
                         xy=(-1.5,3.5),
                         xycoords='axes fraction',
                         size=80,
                         rotation=90)
 
-            ax.annotate(r'$\bf{x_{Bj}}$', 
+            ax.annotate(r'$\mathbf{x_{Bj}}$', 
                         xy=(7.9,-1.2),
                         xycoords='axes fraction',
                         size=90)
@@ -1590,7 +1594,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
                 label1 = 'Unclassified'
 
             #msg=r'${\rm %s~region~EIC~%s}$'%(label1,hadron)
-            msg=r'$\bf{%s~region~EIC}$'%(label1)
+            msg=r'$\mathbf{%s~region~EIC}$'%(label1)
             ax.text(0,8.8,msg,transform=ax.transAxes,size=80)
             #msg =r'${\sqrt{s}=140 \; \; \rm GeV}$'
             #ax.text(0,8.2,msg,transform=ax.transAxes,size=80)
