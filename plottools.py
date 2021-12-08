@@ -14,6 +14,27 @@ mpl.rcParams.update({"mathtext.fontset" : "custom", "mathtext.bf" : "STIXGeneral
 # plt.rcParams['font.family'] = 'serif'
 # plt.rcParams['font.serif'] = ['Times New Roman'] + plt.rcParams['font.serif']
 
+# progress bar setup 
+import time, sys
+from IPython.display import clear_output
+
+def update_progressz(progress):
+    bar_length = 20
+    if isinstance(progress, int):
+        progress = float(progress)
+    if not isinstance(progress, float):
+        progress = 0
+    if progress < 0:
+        progress = 0
+    if progress >= 1:
+        progress = 1
+
+    block = int(round(bar_length * progress))
+
+    clear_output(wait = True)
+    text = "Progress: [{0}] {1:.1f}%".format( "#" * block + "-" * (bar_length - block), progress * 100)
+    print(text)
+
 def custom_label(label):
     if label == "Q2":
         label = r'\boldmath{$Q^2\; \rm(GeV^2)$}'
@@ -1446,7 +1467,12 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
     leftb, bottomb, widthb, heightb = [0.3, 0.6, 0.15, 0.2]
     ax2 = fig.add_axes([leftb, bottomb, widthb, heightb])
     
+    # counter for progress bar
+    barint = -1
+    barint_max = 73
+    
     for k in sorted(bins):
+        barint +=1 
         ir,ic=k
         #print k
         ax = py.subplot(gs[ir,ic])
@@ -1513,6 +1539,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
             #plot = ax.scatter(dd[plotx],dd[ploty], s=500*dd[affinity], c=dd[affinity], 
             #                      cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             #ax.plot(dd[plotx],dd[ploty],'k-', alpha=0.25,label='') 
+            update_progressz(barint / (barint_max+2))
             plot = ax.scatter(dd[ploty],dd[plotx], s=500*dd[affinity]**0.2+10, c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             ax.plot(dd[ploty],dd[plotx],'k-', alpha=0.25,label='')
@@ -1610,5 +1637,6 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
     cbar_ax = fig.add_axes([0.87, 0.2, 0.01, 0.5])
     cbar = fig.colorbar(plot,cax=cbar_ax)
     cbar.ax.tick_params(labelsize=40)
+    update_progressz(barint / (barint_max+1))
 #     outname = 'EIC_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
 #     py.savefig('Figs/%s.pdf'%outname)      
