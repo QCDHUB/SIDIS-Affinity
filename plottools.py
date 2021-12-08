@@ -1638,7 +1638,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
     cbar = fig.colorbar(plot,cax=cbar_ax)
     cbar.ax.tick_params(labelsize=40)
     update_progressz(barint / (barint_max+1))
-    time.sleep(8)
+    time.sleep(2)
     update_progressz(1)
 #     outname = 'EIC_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
 #     py.savefig('Figs/%s.pdf'%outname)      
