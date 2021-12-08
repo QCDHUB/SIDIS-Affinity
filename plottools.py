@@ -1639,7 +1639,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
     cbar.ax.tick_params(labelsize=40)
     time.sleep(2)
     update_progressz(barint / (barint_max+1))
-    time.sleep(5)
+    time.sleep(1)
     update_progressz(1)
 #     outname = 'EIC_%s_vs_%s_%s_%s'%(ploty,plotx,hadron,affinity)
 #     py.savefig('Figs/%s.pdf'%outname)      
