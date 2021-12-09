@@ -1425,7 +1425,7 @@ def plotEIC(fname, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z
     py.savefig('gallery/%s.pdf'%outname)    
 
 
-def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT', ploty = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
+def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', ploty = 'qT', plotx = 'z', cmap_name = 'seismic_r', yscale = 'linear'):
 
     data['Q']=data['Q2']**0.5
     if 'had' not in data.keys() and 'hadron' in data.keys(): 
@@ -1479,11 +1479,11 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
         ax.set_xlim(0,8)
         ax.set_ylim(0,1)
         #ax.set_xlim(0,data.qT.max())
-        if ploty == 'z': 
+        if plotx == 'z': 
             ax.set_xlim(0,1) # z is in [0,1]
             ax2.set_xlim(0,1)
             ax2.set_xlabel(r'$\mathbf{z_h}$', fontsize=70) 
-        if plotx == 'pT': 
+        if ploty == 'pT': 
             if affinity.startswith('col'):
                 max = 40
             elif affinity.startswith('tmd'):
@@ -1497,7 +1497,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', plotx = 'qT
             ax.set_ylim(0,max) # pT is in [0,2]
             ax2.set_ylim(0,max)
             ax2.set_ylabel(r'$\mathbf{P_{hT} \; (GeV)}$', fontsize=70) 
-        if plotx == 'qT': 
+        if ploty == 'qT': 
             ax.set_ylim(0,15) #(0,data.qT.max())
             ax2.set_ylim(0,15)
             ax2.set_ylabel(r'$\mathbf{q_T \; \rm (GeV)}$', fontsize=70)
