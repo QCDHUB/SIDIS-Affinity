@@ -4,11 +4,11 @@
 
 > Interactive Affinity Tool  
 
-[![Interactive Affinity Tool](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Juniper82/SIDIS-Affinity/blob/main/interactive_plot.ipynb)  
+[![Interactive Affinity Tool](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/QCDHUB/SIDIS-Affinity/blob/main/interactive_plot.ipynb)  
 
 > Model Evaluation   
 
-[![Model Evaluation](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Juniper82/SIDIS-Affinity/blob/main/Finalrun_test_all_autothreshold.ipynb)
+[![Model Evaluation](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/QCDHUB/SIDIS-Affinity/blob/main/Finalrun_test_all_autothreshold.ipynb)
 
 ### Running the notebook:
 #### 1. Select "Run all" from the the Runtime drop down menu located in the upper left of notebook 
