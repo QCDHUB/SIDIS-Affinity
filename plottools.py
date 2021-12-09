@@ -1540,14 +1540,14 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', ploty = 'qT
             #                      cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             #ax.plot(dd[plotx],dd[ploty],'k-', alpha=0.25,label='') 
             update_progressz(barint / (barint_max+2))
-            plot = ax.scatter(dd[ploty],dd[plotx], s=500*dd[affinity]**0.2+10, c=dd[affinity], 
+            plot = ax.scatter(dd[plotx],dd[ploty], s=500*dd[affinity]**0.2+10, c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
             ax.plot(dd[ploty],dd[plotx],'k-', alpha=0.25,label='')
             #ax.text(0, 2, k, fontsize=18) # show what bin is shown
             if k == (3,9):
-                ax2.scatter(dd[ploty],dd[plotx], s=2500*dd[affinity]**0.2+20, c=dd[affinity], 
+                ax2.scatter(dd[plotx],dd[ploty], s=2500*dd[affinity]**0.2+20, c=dd[affinity], 
                                   cmap=cmap, alpha=0.8,vmin=0,vmax=1,label='') 
-                ax2.plot(dd[ploty],dd[plotx],'k-', alpha=0.25,label='')
+                ax2.plot(dd[plotx],dd[ploty],'k-', alpha=0.25,label='')
                 ax.annotate('',xy=(0.,1),xycoords='axes fraction',xytext=(-1.8,2), 
                             arrowprops=dict(arrowstyle="->, head_width=1, head_length=2", color='k',lw=4))
                   
