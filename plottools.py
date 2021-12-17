@@ -1609,6 +1609,8 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', ploty = 'qT
                 label1 = 'TMD'
             elif affinity.startswith('col'): 
                 label1 = 'Collinear' 
+            elif affinity.startswith('cur'): 
+                label1 = 'Current' 
             elif affinity.startswith('target'): 
                 label1 = 'Target' 
             elif affinity.startswith('soft'): 
