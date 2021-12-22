@@ -4,7 +4,7 @@
 
 > Interactive Affinity Tool  
 
-[Interactive Affinity Tool](https://colab.research.google.com/github/QCDHUB/SIDIS-Affinity/blob/main/interactive_affinity_tool.ipynb)
+[![Interactive Affinity Tool](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/QCDHUB/SIDIS-Affinity/blob/main/interactive_affinity_tool.ipynb)
 
 > Model Evaluation   
 
