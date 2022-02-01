@@ -1614,7 +1614,7 @@ def plotEIC1(data, predictions, hadron = 'pi+', affinity = 'tmdaff', ploty = 'qT
             elif affinity.startswith('target'): 
                 label1 = 'Target' 
             elif affinity.startswith('soft'): 
-                label1 = 'Soft'
+                label1 = 'Central'
             elif affinity.startswith('highorder'): 
                 label1 = 'High order'
             elif affinity.startswith('match'): 
