@@ -1,5 +1,7 @@
 # SIDIS-Affinity
 
+06/03/2025 Interactive affinity tool was not working properly with the newest version of Tensorflow. The notebook was updated.
+
 ### To access the Colab notebook please click on the Open in Colab badge below
 
 > Interactive Affinity Tool  
